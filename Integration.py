@@ -36,10 +36,10 @@ plt.show()"""
 ####### We apply the same method but to the Simple Man's model where the laser source is represented by E(t)=E1*sin(omega*t+phi).
 
 """Definition of the vector which will be integrated by the odeint function in the monochromatic case."""
-def Simplified_Laser_source(y, t, q, m, E1, omega, phi1):
+""""def Simplified_Laser_source(y, t, q, m, E1, omega, phi1):
     x, x_dot = y
     dydt = [x_dot, q*E1*np.sin(omega*t+phi1)/m]
-    return dydt
+    return dydt"""
 
 
 ####### We integrate the movement equation for any laser source represented by a function E(t).
@@ -49,11 +49,25 @@ def Laser_source_1(y,t):
     dydt = [x_dot, q*E_1(t)/m]
     return dydt
 
+def Laser_source_2(y,t):
+    x, x_dot = y
+    dydt = [x_dot, q*E_2(t)/m]
+    return dydt
+
+def Laser_source_3(y,t):
+    x, x_dot = y
+    dydt = [x_dot, q*E_3(t)/m]
+    return dydt
+
 def Integration(Source_function,y0,time_array):
     return odeint(Source_function,y0,time_array)
 
+
+"""TEST des fonctions
 def x(t):
     return t**2
 
 print(Laser_source_1([0,0],2))
-print(Integration(Laser_source_1, [0,0],[0,1,2]))
+print(Integration(Laser_source_1, [0,0],[0,1,2])[0])"""
+
+

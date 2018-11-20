@@ -22,3 +22,4 @@ omega=2*np.pi/T
 phi1=0													
 phi2=0	
 phi3=0	
+

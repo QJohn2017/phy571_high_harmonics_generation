@@ -59,3 +59,4 @@ def find_Treturn(function):
 
 t_prime=0.26*T
 print(find_Treturn(X))
+

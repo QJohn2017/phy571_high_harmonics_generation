@@ -33,3 +33,4 @@ def V_1_theorical(t):
 
 def Ekin_1_theorical(t):
     return 0.5*m*(V_1_theorical(t))**2
+
