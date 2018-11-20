@@ -28,8 +28,9 @@ class wavefunction:
     def get_position(self):
         """return the average position over time"""
         position = np.zeros(self.T)
+        X = np.linspace(self.xmin, self.xmax, self.N)
         for i in range(self.T):
-            position[i] = scp.simps(self.phi[i].conjugate()*self.phi[i], dx = self.dx)
+            position[i] = scp.simps(self.phi[i].conjugate()*X*self.phi[i], dx = self.dx)
         return position
     
     def get_laplacian(self):
