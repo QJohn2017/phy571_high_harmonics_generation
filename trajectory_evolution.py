@@ -24,7 +24,7 @@ def trajectory(t_prime):
     y0=[0,0]
     TRAJ=np.zeros([2,Number_of_points])
     T_PRIME = np.linspace(t_prime,t_prime+2*T,Number_of_points)
-    SOL = Integration(Laser_source,y0,T_PRIME,E_1)
+    SOL = Integration(Laser_source_1,y0,T_PRIME)
     TRAJ[0]=T_PRIME
     TRAJ[1]=SOL
     return TRAJ

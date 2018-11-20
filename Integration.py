@@ -6,6 +6,7 @@
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
 from Physical_quantities import * 
+from Usefull_functions import *
 from color import *
 
 #Here is the exemple of the pendulum where one can use of the function odeint :
@@ -43,12 +44,16 @@ def Simplified_Laser_source(y, t, q, m, E1, omega, phi1):
 
 ####### We integrate the movement equation for any laser source represented by a function E(t).
 
-def Laser_source(y,t,E):
+def Laser_source_1(y,t):
     x, x_dot = y
-    dydt = [x_dot, q*E(t)/m]
+    dydt = [x_dot, q*E_1(t)/m]
     return dydt
 
-def Integration(Source_function,y0,time_array,E):
-    return odeint(Source_function,y0,time_array,args=(E))
+def Integration(Source_function,y0,time_array):
+    return odeint(Source_function,y0,time_array)
 
+def x(t):
+    return t**2
 
+print(Laser_source_1([0,0],2))
+print(Integration(Laser_source_1, [0,0],[0,1,2]))
