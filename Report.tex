@@ -1,0 +1,55 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{float}
+\graphicspath{{../figures/}}
+
+\title{High Order Harmonic Generation : Classical Model}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction to Simple Man's Model}
+
+High Order Harmonic Generation (HHG) is a quantum mechanical process. It is, however, extremely useful to have worked through the classical problem of a charged particle in an electromagnetic field before dealing with the full complexity of HHG. This semi-classical treatment is often referred to as the Simple Man's Model.\\
+In this model, the electron tunnels into the continuum through the atomic potential, which is deformes due to the strong laser field. After tunneling into the continuum, the electron is accelerated away from the atom by the laser field. At a later time the laser field changes sign and the electron is pulled back toward the atom. The electron can recombine with the atom and radiate some photons. The photon energy is the sum of the binding potential and kinetic energy of the returning electron due to energy conservation.
+
+\section{Key steps}
+Here are presented the main tasks which will be implemented concerning the classical problem :\\
+
+$\bullet$ Integration of the movement equation using the \textbf{odeint} function.\\
+
+$\bullet$ Plot a series of graph for $x(t)$ and $E(t)$ for several times of ionization $t_{\mathrm{ionization}}$. Interpretation : Existence or not of the return time. Existence only if $t_{\mathrm{ionization}} \in \left[\frac{T}{4};\frac{T}{2}\right] \cup \left[\frac{3T}{4};T\right]$ \\
+
+$\bullet$ Find the return time $t_{\mathrm{return}}$ as a function of $t_{\mathrm{ionization}}$ using the \textbf{scipy.optimize.brenth} function.\\
+
+$\bullet$ Plot $t_{\mathrm{return}}$ as a function of $t_{\mathrm{ionization}}$. Physical interpretation of the result.\\
+
+$\bullet$ Plot the kinetic energy $E_{kin}$ as a function of $t_{\mathrm{ionization}}$.\\
+
+
+\section{Results}
+
+The results are shown in Fig.~\ref{fig:averages}. When you show a figure, make
+sure the labels are large enough and that the caption has all the necessary details
+to understand what the figure is and how it was obtained.
+
+\begin{figure}[H]
+\begin{center}
+%
+%\includegraphics[width=0.6\textwidth]{observables}
+%
+\caption{Average energy, magnetization, specific heat and magnetic
+susceptibility as a function of the temperature $T$.  The vertical dashed line
+shows the critical temperature found by Onsager. The results were obtained
+on a $4 \times 4$ lattice from a total of $10^6$ measurements. $4^2$ steps
+were used between two measurements.}\label{fig:averages}
+%
+
+$$\frac{\mu^2}{\Gamma^2+(\omega-\omega_0)^2}$$
+\end{center}
+\end{figure}
+
+\end{document}
