@@ -1,4 +1,4 @@
-#This file is used to plot the evolution of the trajectory with respect to the time. The indidence of the inization time t_prime on the result is studied.
+#This file is used to plot the evolution of the trajectory with respect to the time. The indidence of the ionization time t_prime on the result is studied.
 #t_prime is the time when the electron leaves the atomical orbit. It's the beginning of the classical solution. We define here a vector of t_prime oh length Number_of_t_prime
 
 import numpy as np
