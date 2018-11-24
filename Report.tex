@@ -30,6 +30,22 @@ $\bullet$ Plot $t_{\mathrm{return}}$ as a function of $t_{\mathrm{ionization}}$.
 $\bullet$ Plot the value of the kinetic energy $E_{kin}$ at the return time as a function of $t_{\mathrm{ionization}}$.\\
 
 
+\section{The files.py}
+The aim of this section is to briefly explain the function of every file.\\
+
+$\bullet$ \textbf{Integration.py :} used to derive the solution from the movement equation. The \textbf{odeint} function has been chosen to perform the integration.The system needs to be written under the vectorial notation y=[x,x'] where one is looking for y'=[x',x''].\\
+
+$\bullet$ \textbf{Physical\_quantities.py :} definition of the physical quantities in (u.a) \\
+
+$\bullet$ \textbf{Useful\_functions.py :} contains all the functions which will be usefull for the project. e.g : Electric Field for the laser source, theoretical solution for the movement, etc...\\
+
+$\bullet$ \textbf{color.py :} used to build a gradient of N colors between two colors given in the RGB notation.\\
+
+$\bullet$ \textbf{trajectory\_evolution.py :} used to plot the evolution of the trajectory with respect to the time. The indidence of the ionization time $t'$ on the result is studied.
+$t'$ is the time when the electron leaves the atomical orbit. It's the beginning of the classical solution. We define here a vector of $t'$ of length Number\_of\_t\_prime.
+\\
+
+$\bullet$ \textbf{find\_Treturn.py :} calculation of the return time $t''$ when it exists.\\
 
 
 \section{Results}
@@ -53,3 +69,4 @@ were used between two measurements.}\label{fig:averages}
 \end{figure}
 
 \end{document}
+
