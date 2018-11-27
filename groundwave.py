@@ -5,6 +5,7 @@ Created on Mon Nov 19 18:42:21 2018
 @author: marti
 """
 
+import os
 import numpy as np
 import scipy.integrate as scp
 import matplotlib.pyplot as plt
@@ -60,10 +61,12 @@ for i in range(S):
     Test.propagate()
     E[i] = Test.get_energy()
 
-    
-plt.plot(Xtest, 100*np.abs(Test.phi)**2)
+print(E[-2])
+os.chdir('/users/eleves-a/2016/martin.guillot')
+np.save('Groundstate', Test.phi)
+P = np.load('Groundstate.npy')
+plt.plot(Xtest, 100*np.abs(P)**2)
 plt.plot(Xtest, Vtest)
 plt.show()
 plt.plot([k for k in range(S)], E)
 plt.show()
-print(E[-2])
