@@ -41,7 +41,7 @@ class wavefunction:
     def get_energy(self, V, E):
         """return the average energy over time""" 
         energy = np.zeros(self.T)
-        X = np.array([self.xmin+i*self.dx for i in range(N)])
+        X = np.array([self.xmin+i*self.dx for i in range(self.N)])
         for i in range(self.T):
                 energy[i] = scp.simps(self.phi[i].conjugate()*(-1/2*self.get_laplacian()[i]+V*self.psi[i]-X*E[i]*self.psi[i]), dx = self.dx)
         return energy
