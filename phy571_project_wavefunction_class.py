@@ -19,7 +19,8 @@ class wavefunction:
         self.xmax = xmax
         self.t0 = t0
         self.tfinal = tfinal
-        self.dx = (self.xmax-self.xmin)/self.N
+        self.X, self.dx = np.linspace(xmin, xmax, N, retstep = True)
+        self.K = np.fft.fftfreq(N, self.dx)
         psi = np.zeros(T, N)
         psi[0] = psi0
         self.psi = psi """a T x N array representing the wavefunction during the experiment"""
@@ -46,9 +47,16 @@ class wavefunction:
         return energy
     
     def get_dipole_acceleration(self, V, E):
-        """return the dipole acceleratetion over time"""
+        """return the dipole acceleratetion over time for a time-independant potential V and a slowly variating uniform E field """
         A = np.zeros(self.T)
         dx = (self.xmax-self.xmin)/self.N
         for i in range(self.T):
                 A[i] = scp.simps(self.psi[i].conjugate()*(-np.gradient(V, dx))*self.psi[i], dx = self.dx)+E[i]
         return A
+    
+    def get_spectrum(self, V, E):
+        """return the spectrum of the radiation emitted by the electron by fourrier-transforming the dipole acceleration"""
+        S = np.fft.fft(self.get_dipole_acceleration(V, E))
+        return S
+                       
+        
