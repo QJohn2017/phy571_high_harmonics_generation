@@ -1,5 +1,5 @@
-#This file is used to plot the evolution of the trajectory with respect to the time. The indidence of the ionization time t_prime on the result is studied.
-#t_prime is the time when the electron leaves the atomical orbit. It's the beginning of the classical solution. We define here a vector of t_prime of length Number_of_t_prime
+#This file is used to plot the evolution of the trajectory with respect to the time. The indidence of the inization time t_prime on the result is studied.
+#t_prime is the time when the electron leaves the atomical orbit. It's the beginning of the classical solution. We define here a vector of t_prime oh length Number_of_t_prime
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -20,7 +20,7 @@ Echelle_c = echelle(jaune,rouge,Number_of_t_prime)  #gradient of color from yell
 Echelle_d = echelle(bleu,jaune,Number_of_t_prime)   #gradient of color from blue to yellow
 
 
-#We define the function trajectory which will convey the position and velocity of the electron at each time between t_prime and t_prime+2*T_prime
+#We define the function trajectory which will convey the position and velocity of the electron at each time between t_prime and 3*T_prime
 """The first argument of the ouput is a table of time starting at t_prime and ending at t_prime+2*T. Dim of the matrix = (1,N)
 The second argument of the output are the position and velocity for every time. Dim of the matrix = (N,2)  """
 def trajectory(t_prime):
@@ -33,15 +33,20 @@ def trajectory(t_prime):
     return TRAJ
 
 
+
 #We plot here the trajectories for an ionization time in [0,T]
-T_prime=np.linspace(0,T,Number_of_t_prime)
-for i in range(Number_of_t_prime):
+"""for i in range(Number_of_t_prime):
     plt.plot(trajectory(T_prime[i])[0],trajectory(T_prime[i])[1][:,0],color=rgb_to_hex(Echelle_c[i]))
 plt.plot(np.linspace(0,3*T,10),np.linspace(0,0,10),color='k')  
 plt.grid() 
+plt.xlabel('Ionization Time', fontsize=20)
+#plt.xticks( np.arange(4)*T, (ur"$0$", ur"$T$", ur"$2T$", ur"$3T$"), fontsize=16)
+#plt.ylabel('Amplitude', fontsize=20)
 plt.show()
+"""
 
 
+"""
 #In reality there are to cases which need to be distinguished.
 #On the one hand, the case where the electron never goes back to the atom : It occurs for an ionization time in [0,T/4] or in [T/2,3T/4]
 #On the other hand, the case where the electron goes back to the atom : It occurs for an ionization time in [T/4,T/2] or in [3T/4,T]. We can then define a return time t_return
@@ -59,6 +64,10 @@ for i in range(Number_of_t_prime):
 s=np.linspace(0,3*T,Number_of_points)
 plt.plot(s,np.linspace(0,0,Number_of_points),color='k')
 plt.plot(s,E_1(s),color='k')
+plt.xlabel('Ionization Time', fontsize=20)
+plt.ylabel('Trajectories (color lines) and Electric Field', fontsize=20)
+plt.xticks( np.arange(4)*T, (ur"$0$", ur"$T$", ur"$2T$", ur"$3T$"), fontsize=16)
+plt.yticks( np.arange(3)-1, (ur"$-E_{0}$" , ur"$0$", ur"$E_{0}$"), fontsize=16 )
 plt.grid() 
 plt.show()
 
@@ -74,8 +83,15 @@ for i in range(Number_of_t_prime):
 s=np.linspace(0,3*T,Number_of_points)
 plt.plot(s,np.linspace(0,0,Number_of_points),color='k')
 plt.plot(s,E_1(s),color='k')
+plt.xlabel('Ionization Time', fontsize=20)
+plt.ylabel('Trajectories (color lines) and Electric Field', fontsize=20)
+plt.xticks( np.arange(4)*T, (ur"$0$", ur"$T$", ur"$2T$", ur"$3T$"), fontsize=16)
+plt.yticks( np.arange(3)-1, (ur"$-E_{0}$" , ur"$0$", ur"$E_{0}$"), fontsize=16 )
 plt.grid()
 plt.show()
+
+
+"""
 
 
 
