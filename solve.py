@@ -116,7 +116,8 @@ for i in range(nt):
     
 
 plt.figure()
-plt.semilogy(crank.t_pts,Norms)
+#plt.semilogy(crank.t_pts,Norms)
+plt.plot(crank.t_pts,Norms)
 plt.xlabel('$t \  (a.u.)$', fontsize='large')
 plt.ylabel('$\psi^2 $',fontsize='large')
 plt.title('Norm of the wavefunction')
@@ -125,6 +126,7 @@ plt.title('Norm of the wavefunction')
 plt.figure()
 #plt.plot(crank.t_pts,logNorms)
 plt.pcolormesh(crank.x_pts, crank.t_pts, abs(crank.psi_matrix)**2, norm=LogNorm(vmin=1e-3,vmax=1))
+#plt.pcolormesh(crank.x_pts, crank.t_pts, abs(crank.psi_matrix)**2)
 plt.xlabel('$x \  (a.u.)$', fontsize='large')
 plt.ylabel('$t \ (a.u.)$', fontsize='large')
 plt.title('Squared modulus of the wavefunction')
