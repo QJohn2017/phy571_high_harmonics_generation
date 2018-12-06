@@ -10,7 +10,7 @@ from matplotlib import pyplot as plt
 from math import *
 
 
-
+import scipy
 import numpy as np
 import scipy.sparse
 import scipy.linalg as la
@@ -27,13 +27,23 @@ class CrankNicolson2:
         self.t_min, self.t_max, self.n_t = t_min, t_max, n_t
         self.x_pts, self.delta_x = np.linspace(x_min, x_max, n_x, retstep=True, endpoint=False)
         self.t_pts, self.delta_t = np.linspace(t_min, t_max, n_t, retstep=True, endpoint=False)
-        
+        self.energy = np.zeros(self.n_t)*1j #This array contains the average energy over time
+        self.position = np.zeros(self.n_t)*1j #This array contains the average position over time
+        self.dipole_acceleration = np.zeros(self.n_t)*1j #This array contains the average dipole acceleration over time
     def set_parameters(self, f):
         
         self.f =  f
+    
+    def get_laplacian(self, psi):
+        """terurn the 1D laplacian of the wavefunction, it will be useful to compute the energy"""
+        L = np.zeros(self.n_x)*1j
+        for i in range(self.n_x-1):
+            L[i] = (psi[i+1]+psi[i-1]-2*psi[i])
+        return L/self.delta_x**2
+        #return (self.phi[-2:]+self.phi[:-2]-2*self.phi[1:-1])/self.dx**2
 
 #get next psi
-    def solve(self, psi_init, boundary_conditions):
+    def solve(self, psi_init, V_matrix, boundary_conditions):
             
         sig = 1j* self.delta_t / (4.* self.delta_x**2)
         
@@ -107,6 +117,11 @@ class CrankNicolson2:
         fpsi_1=self.f(psi,0)
         for n in range(self.n_t):
             self.psi_matrix[n,:] = psi
+            Laplacian_psi = self.get_laplacian(psi)
+            self.position[n] = scipy.integrate.simps(psi.conjugate()*self.x_pts*psi, dx = self.delta_x)
+            self.energy[n] = scipy.integrate.simps(psi.conjugate()*(-1/2*Laplacian_psi+V_matrix[n]*psi, self.x_pts), dx = self.delta_x)
+            self.dipole_acceleration[n] = scipy.integrate.simps(psi.conjugate()*-1*np.gradient(V_matrix[n], self.delta_x)*psi, dx = self.delta_x)
+            
             fpsi_2=self.f(psi,n)
             
             psi = la.solve_banded((1,1),A, B.dot(psi) - 1j*self.delta_t * (3/2*fpsi_2-1/2*fpsi_1),
