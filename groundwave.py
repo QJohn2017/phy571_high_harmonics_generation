@@ -52,19 +52,19 @@ class Groundstate:
 Xtest = np.linspace(-50,50, 1024)
 Vtest = -1/np.sqrt(2+Xtest**2)
 phitest = np.exp(-0.01*Xtest**2)+0j
-Test = Groundstate(1024, 1e-4*(1-1j),-50, 50, Vtest, phitest)
+Test = Groundstate(1024, 1e-4*(-1j),-50, 50, Vtest, phitest)
 #phitest = np.cos(np.pi/10*Xtest)**2
 
-S = 10000
+S = 1
 E = np.zeros(S)
 for i in range(S):
     Test.propagate()
     E[i] = Test.get_energy()
 
-print(E[-2])
+print(E[-1])
 np.save('Groundstate', Test.phi)
 P = np.load('Groundstate.npy')
-plt.plot(Xtest, 1*np.abs(P)**2)
+plt.plot(Xtest,0.1*np.abs(P)**2)
 plt.plot(Xtest, Vtest)
 plt.show()
 plt.plot([k for k in range(S)], E)

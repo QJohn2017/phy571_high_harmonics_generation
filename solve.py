@@ -86,7 +86,7 @@ u = np.load('Groundstate.npy')
 #    elt=elt/N
 
 
-crank.solve(u, boundary_conditions=['dirichlet', 'dirichlet'])
+crank.solve(u, V_matrix, boundary_conditions=['dirichlet', 'dirichlet'])
 
 plt.figure()
 plt.plot(crank.x_pts, crank.get_first_psi().real, '-b', lw=2)
@@ -116,17 +116,27 @@ for i in range(nt):
     
 
 plt.figure()
-#plt.semilogy(crank.t_pts,Norms)
-plt.plot(crank.t_pts,Norms)
+plt.semilogy(crank.t_pts,Norms)
 plt.xlabel('$t \  (a.u.)$', fontsize='large')
 plt.ylabel('$\psi^2 $',fontsize='large')
 plt.title('Norm of the wavefunction')
+
+plt.figure()
+plt.semilogy(crank.t_pts,crank.position)
+plt.xlabel('$t \  (a.u.)$', fontsize='large')
+plt.ylabel('$\psi^2 $',fontsize='large')
+plt.title('Average position')
+
+plt.figure()
+plt.semilogy(2*np.pi*np.fft.fftfreq(crank.n_t, crank.delta_t), np.fft.fft(crank.dipole_acceleration))
+plt.xlabel('$t \  (a.u.)$', fontsize='large')
+plt.ylabel('$\psi^2 $',fontsize='large')
+plt.title('spectrum')
 
 
 plt.figure()
 #plt.plot(crank.t_pts,logNorms)
 plt.pcolormesh(crank.x_pts, crank.t_pts, abs(crank.psi_matrix)**2, norm=LogNorm(vmin=1e-3,vmax=1))
-#plt.pcolormesh(crank.x_pts, crank.t_pts, abs(crank.psi_matrix)**2)
 plt.xlabel('$x \  (a.u.)$', fontsize='large')
 plt.ylabel('$t \ (a.u.)$', fontsize='large')
 plt.title('Squared modulus of the wavefunction')
