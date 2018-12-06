@@ -37,7 +37,7 @@ class CrankNicolson2:
     def get_laplacian(self, psi):
         """terurn the 1D laplacian of the wavefunction, it will be useful to compute the energy"""
         L = np.zeros(self.n_x)*1j
-        for i in range(self.n_x-1):
+        for i in range(1,self.n_x-1):
             L[i] = (psi[i+1]+psi[i-1]-2*psi[i])
         return L/self.delta_x**2
         #return (self.phi[-2:]+self.phi[:-2]-2*self.phi[1:-1])/self.dx**2
@@ -119,7 +119,7 @@ class CrankNicolson2:
             self.psi_matrix[n,:] = psi
             Laplacian_psi = self.get_laplacian(psi)
             self.position[n] = scipy.integrate.simps(psi.conjugate()*self.x_pts*psi, dx = self.delta_x)
-            self.energy[n] = scipy.integrate.simps(psi.conjugate()*(-1/2*Laplacian_psi+V_matrix[n]*psi, self.x_pts), dx = self.delta_x)
+            self.energy[n] = scipy.integrate.simps(psi.conjugate()*(-1/2*Laplacian_psi+V_matrix[n][:]*psi), dx = self.delta_x)
             self.dipole_acceleration[n] = scipy.integrate.simps(psi.conjugate()*-1*np.gradient(V_matrix[n], self.delta_x)*psi, dx = self.delta_x)
             
             fpsi_2=self.f(psi,n)
