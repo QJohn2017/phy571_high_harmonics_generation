@@ -4,7 +4,7 @@
 Created on Tue Nov 13 15:29:26 2018
 @author: martin.luttmann
 """
-
+import scipy.integrate
 from Cranknicolsoneasy import *
 import matplotlib.pyplot as plt 
 from matplotlib.colors import LogNorm
@@ -34,13 +34,13 @@ omega=0.05
 
 Uc=1.
 def Vc(x): 
-    return -Uc/sqrt(2+x**2)
+    return -Uc/np.sqrt(2+x**2)
 
 #Electric field  
 def E(t):
    
     if t<tau:
-        return E0*np.sin(t/tau*pi)**2*np.sin(omega*t)
+        return E0*np.sin(t/tau*np.pi)**2*np.sin(omega*t)
     else:
         return np.zeros_like(t)
     
