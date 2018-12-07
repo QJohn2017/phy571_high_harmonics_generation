@@ -41,7 +41,7 @@ class CrankNicolson2:
         return L/self.delta_x**2
 
 #get next psi
-    def solve(self, psi_init, V_matrix, boundary_conditions):
+    def solve(self, psi_init, V_matrix, E_matrix, boundary_conditions):
             
         sig = 1j* self.delta_t / (4.* self.delta_x**2)
         
@@ -117,7 +117,7 @@ class CrankNicolson2:
             self.psi_matrix[n,:] = psi
             Laplacian_psi = self.get_laplacian(psi)
             self.position[n] = scipy.integrate.simps(psi.conjugate()*self.x_pts*psi, dx = self.delta_x) #compute the average position at time n*delta_t
-            self.dipole_acceleration[n] = scipy.integrate.simps(psi.conjugate()*-1*np.gradient(V_matrix[n], self.delta_x)*psi, dx = self.delta_x) #compute the average dipole acceleration at time n*delta_t
+            self.dipole_acceleration[n] = scipy.integrate.simps(psi.conjugate()*-1*np.gradient(V_matrix[0], self.delta_x)*psi+E_matrix[n], dx = self.delta_x) #compute the average dipole acceleration at time n*delta_t
             
             fpsi_2=self.f(psi,n)
             
