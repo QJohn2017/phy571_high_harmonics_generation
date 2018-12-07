@@ -15,6 +15,8 @@ All the other files import this one to run correctly.
 
 **Monochromatic_source.py** : File to plot the trajectories, the return time, the time of flight and the kinetic return energy for a monochromatic source E(t)=E0*sin(wt).
 
+**How_to_choose_the_ionization_time.ipnyb** : Notebook to understand when a ionization time gives rise to a retruning electron in the case of a monochromatic source
+
 **Bichromatic_source.py** : File to plot the trajectories, the return time, the time of flight and the kinetic return energy for a bichromatic source E(t)=E0*sin(wt)+E2*sin(2wt).
 
 **Trichromatic_source.py** : File to plot the trajectories, the return time, the time of flight and the kinetic return energy for a trichromatic source EE(t)=E0*sin(wt)+E2*sin(2wt)+E3*sin(3wt).
