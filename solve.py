@@ -44,8 +44,7 @@ def E(t):
         return E0*np.sin(t/tau*pi)**2*np.sin(omega*t)
     else:
         return np.zeros_like(t)
-    
-    
+
 def V(t,x):
     return Vc(x)-x*E(t)
     
@@ -55,7 +54,11 @@ def V(t,x):
 delta_t=crank.delta_t
 delta_x=crank.delta_x
 #delta_t=(t_max-t_min)/nt
-
+#E-field discretize    
+E_matrix = np.zeros(nt)
+for i in range(nt):
+    E_matrix[nt] = E(i*delta_t)
+    
 #potentiel discretise
     #tableau des potentiels aux differents instants t
 V_matrix=np.zeros([nt, nx])
@@ -86,7 +89,7 @@ u = np.load('Groundstate.npy')
 #    elt=elt/N
 
 
-crank.solve(u, V_matrix, boundary_conditions=['dirichlet', 'dirichlet'])
+crank.solve(u, V_matrix, E_matrix, boundary_conditions=['dirichlet', 'dirichlet'])
 
 plt.figure()
 plt.plot(crank.x_pts, crank.get_first_psi().real, '-b', lw=2)
