@@ -57,7 +57,7 @@ delta_x=crank.delta_x
 #E-field discretize    
 E_matrix = np.zeros(nt)
 for i in range(nt):
-    E_matrix[nt] = E(i*delta_t)
+    E_matrix[i] = E(i*delta_t)
     
 #potentiel discretise
     #tableau des potentiels aux differents instants t
@@ -125,13 +125,13 @@ plt.ylabel('$\psi^2 $',fontsize='large')
 plt.title('Norm of the wavefunction')
 
 plt.figure()
-plt.semilogy(crank.t_pts,crank.position)
+plt.plot(crank.t_pts,crank.position)
 plt.xlabel('$t \  (a.u.)$', fontsize='large')
 plt.ylabel('$<X> $',fontsize='large')
 plt.title('Average position over time')
 
 plt.figure()
-plt.semilogy(2*np.pi*np.fft.fftfreq(crank.n_t, crank.delta_t), np.fft.fft(crank.dipole_acceleration))
+plt.semilogy(100*np.pi*np.fft.fftfreq(crank.n_t, crank.delta_t), np.fft.fft(crank.dipole_acceleration))
 plt.xlabel('$\omega \  (a.u.)$', fontsize='large')
 plt.ylabel('$A $',fontsize='large')
 plt.title('Emission spectrum')
