@@ -27,7 +27,6 @@ class CrankNicolson2:
         self.t_min, self.t_max, self.n_t = t_min, t_max, n_t
         self.x_pts, self.delta_x = np.linspace(x_min, x_max, n_x, retstep=True, endpoint=False)
         self.t_pts, self.delta_t = np.linspace(t_min, t_max, n_t, retstep=True, endpoint=False)
-        self.energy = np.zeros(self.n_t)*1j #This array contains the average energy over time
         self.position = np.zeros(self.n_t)*1j #This array contains the average position over time
         self.dipole_acceleration = np.zeros(self.n_t)*1j #This array contains the average dipole acceleration over time
     def set_parameters(self, f):
@@ -35,7 +34,7 @@ class CrankNicolson2:
         self.f =  f
     
     def get_laplacian(self, psi):
-        """return the 1D laplacian of the wavefunction, it will be useful to compute the energy over time"""
+        """return the 1D laplacian of the wavefunction"""
         L = np.zeros(self.n_x)*1j
         for i in range(1,self.n_x-1):
             L[i] = (psi[i+1]+psi[i-1]-2*psi[i])
@@ -118,7 +117,6 @@ class CrankNicolson2:
             self.psi_matrix[n,:] = psi
             Laplacian_psi = self.get_laplacian(psi)
             self.position[n] = scipy.integrate.simps(psi.conjugate()*self.x_pts*psi, dx = self.delta_x) #compute the average position at time n*delta_t
-            self.energy[n] = scipy.integrate.simps(psi.conjugate()*(-1/2*Laplacian_psi+V_matrix[n][:]*psi), dx = self.delta_x) #compute the average energy at time n*delta_t
             self.dipole_acceleration[n] = scipy.integrate.simps(psi.conjugate()*-1*np.gradient(V_matrix[n], self.delta_x)*psi, dx = self.delta_x) #compute the average dipole acceleration at time n*delta_t
             
             fpsi_2=self.f(psi,n)
