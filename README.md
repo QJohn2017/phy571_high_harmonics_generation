@@ -34,7 +34,7 @@ All the other files import this one to run correctly.
 
 **Groundstate** : An array representing the groundstate wavefunction of a soft-coulomb potential.
 
-**Cranknicolsoneasy.py** : Contains the CrankNicolson class that solves Schrodinger equation and compute the observables with a Crank-Nichoslon scheme and a fast tridiagonal solver.
+**Cranknicolsoneasy.py** : Contains the CrankNicolson class that solves Schrodinger equation and compute the observables with a Crank-Nicolslon scheme and a fast tridiagonal solver.
 
 **solve.py** : Main file of the quantum calculation, imports Cranknicolsoneasy.py and load the Groundstate file. In order for this code to run, the spatial grid parameters should match the size of the Groundstate array (the default value is n_x=1024). n_x should be a power of 2 so allow all numpy Fast Fourier Transform calculations.
 
